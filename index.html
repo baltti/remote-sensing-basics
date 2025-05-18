@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Основы дистанционного зондирования</title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/simple.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+	<link rel="stylesheet" href="plugin/reveal-pointer/pointer.css" />
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="tpl-con-title" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Основы дистанционного зондирования<!-- .element: style="font-size: 50px" -->
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 5%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+**Дистанционное зондирование** - это получение данных об объекте без непосредственного контакта.
+
+Например, фотографирование объекта или его лазерное сканирование.
+</div>
+
+
+</div>
+
+<div class="" style="position: absolute; left: 10%; top: 50%; height: 40%; width: 80%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518141402.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://www.paititi.info/ru/tehnologija-poiskov/distancionnoe-zondirovanie-iz-kosmosa/
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 2%; top: 10%; height: 100%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start" align="left">
+
+<div class="block">
+
+**Энергия, которую Земля получает от Солнца, называется называется <mark style="background: #ADCCFFA6;">электромагнитным излучением</mark>**.
+
+Излучение отражается, поглощается и испускается атмосферой или поверхностью Земли.
+</div>
+
+ <!-- .element: style="font-size: 30px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 40%; height: 55%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Снимок экрана 2025-05-18 в 14.21.35.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 2%; top: 7%; height: 100%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start" align="left">
+
+<div class="block">
+
+Спутники несут **приборы или датчики, которые измеряют электромагнитное излучение, отраженное или испускаемое от наземных и атмосферных источников**.
+
+С помощью приборов ученые могут измерять высоту, температуру, влажность содержание (и многое другое) почти для каждой характеристики земной атмосферы, гидросферы, литосферы и биосферы.
+</div>
+
+ <!-- .element: style="font-size: 25px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 40%; height: 50%; width: 80%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518145013.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://gisgeography.com/remote-sensing-earth-observation-guide/
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518144757.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://spec.tass.ru/sfu-dzz/
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518163254.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://landsat.gsfc.nasa.gov/satellites/timeline/
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518145301.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+<div class="" style="position: absolute; left: 2%; top: 7%; height: 100%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start" align="left">
+
+<div class="block">
+
+Разные материалы и объекты по-разному отражают и поглощают энергию, за счет чего возможно, например, определение материала по отраженной длине волны.
+</div>
+
+ <!-- .element: style="font-size: 30px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 27%; height: 65%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518145731.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://earth.jaxa.jp/en/eo-knowledge/remote-sensing/index.html
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518150447.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://mining.earthdaily.com/knowledge-base/knowledge/introduction-to-remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: -10%; top: 0%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518150606.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: -10%; top: 40%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/Pasted image 20250518150632.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://mining.earthdaily.com/knowledge-base/knowledge/introduction-to-remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 0%; height: 30%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+## Классификация по типу сенсора
+</div>
+
+ <!-- .element: style="font-size: 30px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 20%; height: 80%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Pasted image 20250518151901.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 0%; height: 30%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+## Классификация по типу орбиты
+</div>
+
+ <!-- .element: style="font-size: 30px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 10%; height: 80%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Pasted image 20250518153418.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 30%; top: 75%; height: 20%; width: 20%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/polar-orbit.en.gif" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 75%; height: 20%; width: 20%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Преподавание/Пространственный анализ/Картинки для лекций/geostationary-orbit.en.gif" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518154120.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://dewesoft.com/blog/every-satellite-orbiting-earth-and-who-owns-them
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 10%; height: 30%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+## Классификация снимков по разрешению
+</div>
+
+ <!-- .element: style="font-size: 30px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 20%; height: 80%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Pasted image 20250518161254.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 0%; height: 50%; width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Pasted image 20250518161821.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://nireos.com/application/what-is-hyperspectral-imaging/, https://eo.belspo.be/en/iii21-spectral-resolution
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 40%; top: 45%; height: 50%; width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Pasted image 20250518162214.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518162611.png" alt="" style="object-fit: scale-down">
+
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://mining.earthdaily.com/knowledge-base/knowledge/introduction-to-remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518162633.png" alt="" style="object-fit: scale-down">
+
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://eo.belspo.be/en/iii21-spectral-resolution
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518162835.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518162935.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://innoter.com/services/dannye-dzz/
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518163408.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://landsat.gsfc.nasa.gov/satellites/landsat-8/
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518163853.png" alt="" style="object-fit: scale-down">
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 50%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518163048.png" alt="" style="object-fit: scale-down">
+
+
+<div class="block">
+
+https://mining.earthdaily.com/knowledge-base/knowledge/introduction-to-remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<img src="Pasted image 20250518163623.png" alt="" style="object-fit: scale-down">
+
+
+<div class="" style="position: absolute; left: 0%; top: 90%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://www.usgs.gov/media/images/radiometric-resolution-example
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 12%; height: 80%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="Pasted image 20250518163714.png" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 90%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+https://www.earthdata.nasa.gov/learn/earth-observation-data-basics/remote-sensing
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+<!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></div>
+</div></div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+<div class="block">
+
+https://geographicdata.science/book/notebooks/06_spatial_autocorrelation.html
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="block">
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div></script></section><section  data-markdown><script type="text/template"><div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<grid absolute="true" drag="100 100" drop="0 0">
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</grid></script></section><section  data-markdown><script type="text/template">
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div></script></section><section  data-markdown><script type="text/template">
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="block">
+
+https://www.paulamoraga.com/book-spatial/spatial-autocorrelation.html
+</div>
+
+ <!-- .element: style="font-size: 10px" -->
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</div></script></section><section  data-markdown><script type="text/template">
+<div class="" style="position: absolute; left: 80%; top: 0%; height: 10%; width: 20%; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-evenly" align="right">
+
+<img src="logo_osnovnoy_russkiy_chernyy.jpg" alt="" style="object-fit: scale-down">
+
+</div>
+
+
+
+<div class="" style="position: absolute; left: 0%; top: 95%; height: 5%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+© 2025 Балтыжакова Т.И.<!-- .element: style="font-size: 10px" -->
+</div>
+</script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+	<script src="plugin/reveal-pointer/pointer.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+	      RevealPointer,
+        ],
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+			]
+		},
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"controls":true,"progress":true,"slideNumber":true,"transition":"none","transitionSpeed":"default"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
